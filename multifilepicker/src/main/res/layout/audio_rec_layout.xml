@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@drawable/audio_layout_bg">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_fab_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_stop"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="5dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_fab_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="5dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_fab_rec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_rec"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/main_time_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="00:00"
+            android:textColor="#000000"/>
+
+
+    </LinearLayout>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

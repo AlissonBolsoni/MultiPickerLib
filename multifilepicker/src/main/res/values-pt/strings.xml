@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="images_tab">IMAGENS</string>
+    <string name="videos_tab">VIDEOS</string>
+    <string name="audios_tab">AUDIOS</string>
+    <string name="files_tab">ARQUIVOS</string>
+    <string name="max_reached">Máximo de arquivos atingidos</string>
+    <string name="home">Início</string>
+    <string name="save">Salvar</string>
+    <string name="not_enable_mic">Não foi possível ativar o microfone</string>
+</resources>

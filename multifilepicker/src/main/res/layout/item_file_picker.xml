@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/item_picker_image"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_file"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/item_picker_path"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/folder_path_bg"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="10dp"
+        android:textColor="@color/colorTextFolder"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="FOLDER PATH"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <ImageView
+        android:id="@+id/item_picker_image_select"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorBgItemChecked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_ic_mic"
+        android:title="Mic"
+        android:icon="@drawable/ic_mic"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_ic_movie"
+        android:title="Movie"
+        android:icon="@drawable/ic_movie"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_ic_camera"
+        android:title="Picture"
+        android:icon="@drawable/ic_camera"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_ic_done"
+        android:title="@string/save"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="always"/>
+
+</menu>

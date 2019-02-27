@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/file_picker_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?attr/colorPrimary"
+    app:elevation="5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/file_picker_qnt_files"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:textSize="24sp"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0 / 10"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/menu_ic_mic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_mic_"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/menu_ic_movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_movie"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/menu_ic_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_camera"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/menu_ic_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_done"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="15dp"/>
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.Toolbar>
