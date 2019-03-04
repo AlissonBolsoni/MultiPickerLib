@@ -1,5 +1,6 @@
 package br.com.alissontfb.multifilepicker.ui.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -42,6 +43,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_picker_tab)
         setSupportActionBar(file_picker_toolbar)
+
+        permission = CheckPermissions(this, this)
+        permission.verifyPermissions(PERMISSION_REQUEST_STORAGE, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE))
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -102,6 +106,12 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             for (result in grantResults) {
                 if (result == PackageManager.PERMISSION_DENIED) {
 //                    permission.alertPermissionValidation()
+                }
+            }
+        } else if(PERMISSION_REQUEST_STORAGE == requestCode){
+            for (result in grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    permission.alertPermissionValidation()
                 }
             }
         }

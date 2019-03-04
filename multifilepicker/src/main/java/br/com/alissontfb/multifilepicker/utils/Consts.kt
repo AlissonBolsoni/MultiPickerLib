@@ -9,6 +9,7 @@ internal const val CAMERA_REQUEST = 753
 internal const val MOVIE_REQUEST = 852
 internal const val AUDIO_REQUEST = 741
 const val PERMISSION_REQUEST = 741
+const val PERMISSION_REQUEST_STORAGE = 742
 
 internal const val SHARED_PREF_KEY = "BR.COM.ALISSONTFB.MULTIPICKER.PREFERENCES"
 internal const val SP_PROFILE = "SP_PROFILE"
