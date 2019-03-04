@@ -6,11 +6,15 @@ You must add on your app gradle
 (implementation 'com.github.AlissonBolsoni:MultiPickerLib:1.0.1')
 and
 in your project gradle
-(maven { url 'https://jitpack.io' })
 
-after that you can use like this
+```
+(maven { url 'https://jitpack.io' })
+```
+
+After that you can use like this
 
 #config
+```kotlin
 FilePicker
     .Builder(this)
     .maxFiles(1)
@@ -23,12 +27,14 @@ FilePicker
     .saveVideos(false)
     .setProvider(BuildConfig.APPLICATION_ID + ".provider")
     .build()
-    
+```
 
 #onActivityResult
+```kotlin
 if (REQUEST_CODE_TO_RESULT == requestCode && Activity.RESULT_OK == resultCode && intent != null) {
-    val paths = intent.getSerializableExtra(PARAM_RESULT_ITEMS_PATHS) as ArrayList<String>
-    for (path in paths) {
-
-    }
-}
+       val paths = intent.getSerializableExtra(PARAM_RESULT_ITEMS_PATHS) as ArrayList<String>
+       for (path in paths) {
+   
+       }
+   }
+   ```
