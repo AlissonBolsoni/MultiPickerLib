@@ -28,8 +28,12 @@ class FilePicker private constructor(
 
         internal val params = FilePickerParams()
         internal val tabList: ArrayList<String> = ArrayList()
-        init {
-            tabList.add(context.getString(R.string.files_tab))
+
+        fun showFiles(bool: Boolean): Builder {
+            if (bool)
+                tabList.add(context.getString(R.string.files_tab))
+
+            return this
         }
 
         fun showAudios(bool: Boolean): Builder {
@@ -76,7 +80,13 @@ class FilePicker private constructor(
             return this
         }
 
-        fun build() = FilePicker(this)
+        fun build(): FilePicker{
+
+            if(tabList.isEmpty())
+                tabList.add(context.getString(R.string.files_tab))
+
+            return FilePicker(this)
+        }
 
         fun setProvider(provider: String = ""): Builder {
             Preferences(context).setProvider(provider)
