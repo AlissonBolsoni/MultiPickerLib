@@ -31,7 +31,7 @@ FilePicker
 
 #onActivityResult
 ```kotlin
-if (REQUEST_CODE_TO_RESULT == requestCode && Activity.RESULT_OK == resultCode && intent != null) {
+if (REQUEST_CODE_TO_RESULT == requestCode && Activity.RESULT_OK == resultCode && data != null) {
        val paths = intent.getSerializableExtra(PARAM_RESULT_ITEMS_PATHS) as ArrayList<String>
        for (path in paths) {
    
