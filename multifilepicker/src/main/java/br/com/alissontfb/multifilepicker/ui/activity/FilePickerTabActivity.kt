@@ -140,7 +140,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
 
                 val path = File(Environment.getExternalStorageDirectory(), params.folder)
 
-                picsPath = "${path.path}/${System.currentTimeMillis()}.jpg"
+                picsPath = "${path.path}/Images/${System.currentTimeMillis()}.jpg"
                 val picFile = File(picsPath)
 
                 var authority = Preferences(this).getProfile() ?: ""
@@ -168,7 +168,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                     main_audio_layout.visibility = View.VISIBLE
                     val path = File(Environment.getExternalStorageDirectory(), params.folder)
 
-                    audiosPath = "${path.path}/${System.currentTimeMillis()}.mp3"
+                    audiosPath = "${path.path}/Audios/${System.currentTimeMillis()}.mp3"
 
                     try {
                         AudioRecorder(main_fab_play, main_fab_rec, main_fab_stop, audiosPath, {
@@ -191,7 +191,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                 val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
                 val path = File(Environment.getExternalStorageDirectory(), params.folder)
 
-                moviesPath = "${path.path}/${System.currentTimeMillis()}.mp4"
+                moviesPath = "${path.path}/Videos/${System.currentTimeMillis()}.mp4"
                 val picFile = File(moviesPath)
 
                 var authority = Preferences(this).getProfile() ?: ""
