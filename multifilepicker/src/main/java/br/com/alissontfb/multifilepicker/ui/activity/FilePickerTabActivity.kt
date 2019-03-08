@@ -50,6 +50,32 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        menu_ic_done.setOnClickListener {
+            if (selectedFiles.values.isNotEmpty()) {
+                val paths = ArrayList<String>()
+                paths.addAll(selectedFiles.values)
+                val intent = Intent()
+                intent.putExtra(PARAM_RESULT_ITEMS_PATHS, paths)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            } else {
+                onBackPressed()
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        setResult(Activity.RESULT_CANCELED)
+        finish()
+    }
+
+    override fun finish() {
+        FilesCache.reset()
+        super.finish()
+    }
+
+    private fun setUpView(){
         currentAdapter = HashMap()
 
         params = FilePickerParams()
@@ -80,30 +106,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             override fun onPageScrollStateChanged(position: Int) {}
         })
         main_tabs.setupWithViewPager(container)
-
-        menu_ic_done.setOnClickListener {
-            if (selectedFiles.values.isNotEmpty()) {
-                val paths = ArrayList<String>()
-                paths.addAll(selectedFiles.values)
-                val intent = Intent()
-                intent.putExtra(PARAM_RESULT_ITEMS_PATHS, paths)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                onBackPressed()
-            }
-        }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        setResult(Activity.RESULT_CANCELED)
-        finish()
-    }
-
-    override fun finish() {
-        FilesCache.reset()
-        super.finish()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -119,8 +121,10 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             for (result in grantResults) {
                 if (result == PackageManager.PERMISSION_DENIED) {
                     permission.alertPermissionValidation()
+                    break
                 }
             }
+            setUpView()
         }
     }
 
