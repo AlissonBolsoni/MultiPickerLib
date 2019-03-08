@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v4.view.ViewPager
@@ -136,7 +137,10 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             menu_ic_camera.setOnClickListener {
 
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                picsPath = "${getExternalFilesDir(null)}/${System.currentTimeMillis()}.jpg"
+
+                val path = File(Environment.getExternalStorageDirectory(), params.folder)
+
+                picsPath = "${path.path}/${System.currentTimeMillis()}.jpg"
                 val picFile = File(picsPath)
 
                 var authority = Preferences(this).getProfile() ?: ""
@@ -162,7 +166,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                     main_audio_layout.visibility = View.GONE
                 }else{
                     main_audio_layout.visibility = View.VISIBLE
-                    audiosPath = "${getExternalFilesDir(null)}/${System.currentTimeMillis()}.mp3"
+                    val path = File(Environment.getExternalStorageDirectory(), params.folder)
+
+                    audiosPath = "${path.path}/${System.currentTimeMillis()}.mp3"
 
                     try {
                         AudioRecorder(main_fab_play, main_fab_rec, main_fab_stop, audiosPath, {
@@ -183,7 +189,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             menu_ic_movie.setOnClickListener {
 
                 val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-                moviesPath = "${getExternalFilesDir(null)}/${System.currentTimeMillis()}.mp4"
+                val path = File(Environment.getExternalStorageDirectory(), params.folder)
+
+                moviesPath = "${path.path}/${System.currentTimeMillis()}.mp4"
                 val picFile = File(moviesPath)
 
                 var authority = Preferences(this).getProfile() ?: ""

@@ -11,6 +11,7 @@ class FilePickerParams: Serializable{
     var saveAudio = false
     var saveImages = false
     var saveVideo = false
+    var folder = "PikerLib"
     var tabList: ArrayList<String> = ArrayList()
 
 }

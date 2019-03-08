@@ -88,6 +88,11 @@ class FilePicker private constructor(
             return FilePicker(this)
         }
 
+        fun setSaveFolder(folder: String): Builder {
+            params.folder = folder
+            return this
+        }
+
         fun setProvider(provider: String = ""): Builder {
             Preferences(context).setProvider(provider)
             return this
