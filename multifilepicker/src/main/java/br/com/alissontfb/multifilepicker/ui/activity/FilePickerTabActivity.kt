@@ -46,7 +46,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         setSupportActionBar(file_picker_toolbar)
 
         permission = CheckPermissions(this, this)
-        permission.verifyPermissions(PERMISSION_REQUEST_STORAGE, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        permission.verifyPermissions(PERMISSION_REQUEST_STORAGE, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA ))
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
