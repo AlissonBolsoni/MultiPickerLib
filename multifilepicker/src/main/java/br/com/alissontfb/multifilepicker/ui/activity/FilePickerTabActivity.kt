@@ -64,6 +64,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
                 if(params.tabList.size == 1 && p0 == p2){
+
                     val frag = mSectionsPagerAdapter!!.getItem(p0)
                     setUpMenus(frag.type)
                 }
