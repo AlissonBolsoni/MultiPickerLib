@@ -184,6 +184,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                         AudioRecorder(main_fab_play, main_fab_rec, main_fab_stop, audiosPath, {
                             FilesCache.reset()
                             this.currentAdapter[FindFiles.AUDIO]?.putFile(it)
+                            val adapter = this.currentAdapter[FindFiles.AUDIO]
+                            val select = adapter?.getSelectedFiles()?.size?:0
+                            updateQuantityText(select,params.max)
                         },{
                             runOnUiThread {
                                 main_time_audio.text = it
@@ -270,9 +273,15 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             if (requestCode == CAMERA_REQUEST) {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.IMAGE]?.putFile(File(picsPath))
+                val adapter = this.currentAdapter[FindFiles.IMAGE]
+                val select = adapter?.getSelectedFiles()?.size?:0
+                updateQuantityText(select,params.max)
             } else if (requestCode == MOVIE_REQUEST) {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.VIDEO]?.putFile(File(moviesPath))
+                val adapter = this.currentAdapter[FindFiles.VIDEO]
+                val select = adapter?.getSelectedFiles()?.size?:0
+                updateQuantityText(select,params.max)
             } else if (requestCode == AUDIO_REQUEST) {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.AUDIO]?.putFile(File(audiosPath))
