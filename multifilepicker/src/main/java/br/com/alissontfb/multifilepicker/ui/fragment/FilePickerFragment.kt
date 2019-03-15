@@ -27,10 +27,10 @@ abstract class FilePickerFragment(val type: Int) : Fragment() {
         internal const val VIDEO_TYPE = 40
     }
 
-    internal lateinit var obFileView: ObFileView
+    private lateinit var obFileView: ObFileView
     internal var adapter: FileListAdapter? = null
     internal lateinit var delegate: FilePickerItemsDelegate
-    internal lateinit var params: FilePickerParams
+    private lateinit var params: FilePickerParams
     internal lateinit var root: File
     private val home = Environment.getExternalStorageDirectory()
 
@@ -46,7 +46,6 @@ abstract class FilePickerFragment(val type: Int) : Fragment() {
         params = delegate.getParams()
 
         openDirectory()
-        setAdapter()
     }
 
     abstract fun setAdapter()
@@ -56,6 +55,7 @@ abstract class FilePickerFragment(val type: Int) : Fragment() {
     private fun openDirectory() {
         obFileView = initAdapter()
         createAdapterFiles()
+        setAdapter()
 
         if (type == FILE_TYPE)
             createAdapterBreadcrumb()

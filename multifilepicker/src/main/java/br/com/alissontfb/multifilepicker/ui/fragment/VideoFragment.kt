@@ -7,7 +7,7 @@ import br.com.alissontfb.multifilepicker.utils.FindFiles
 class VideoFragment: FilePickerFragment(FilePickerFragment.VIDEO_TYPE) {
 
     override fun initAdapter(): ObFileView {
-        return FilesCache.getVideos(root)
+        return FilesCache.getVideos()
     }
 
     override fun setAdapter() {

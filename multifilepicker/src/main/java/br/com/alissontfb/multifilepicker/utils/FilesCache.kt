@@ -14,8 +14,10 @@ object FilesCache {
     private var reloadAudio = true
     private var reloadVideo = true
 
+    fun getImages() = obFileViewImages!!
+
     fun getImages(root: File): ObFileView {
-        if (obFileViewImages != null && !reloadImage) return obFileViewImages!!
+        if (obFileViewImages != null && !reloadImage) return getImages()
 
         val findFiles = FindFiles()
         val files = findFiles.execute(root, FindFiles.IMAGE)
@@ -35,8 +37,10 @@ object FilesCache {
         return obFileViewImages!!
     }
 
+    fun getVideos() = obFileViewVideos!!
+
     fun getVideos(root: File): ObFileView {
-        if (obFileViewVideos != null && !reloadVideo) return obFileViewVideos!!
+        if (obFileViewVideos != null && !reloadVideo) return getVideos()
 
         val findFiles = FindFiles()
         val files = findFiles.execute(root, FindFiles.VIDEO)
@@ -52,8 +56,10 @@ object FilesCache {
         return obFileViewVideos!!
     }
 
+    fun getAudios() = obFileViewAudios!!
+
     fun getAudios(root: File): ObFileView {
-        if (obFileViewAudios != null && !reloadAudio) return obFileViewAudios!!
+        if (obFileViewAudios != null && !reloadAudio) return getAudios()
 
         val findFiles = FindFiles()
         val files = findFiles.execute(root, FindFiles.AUDIO)

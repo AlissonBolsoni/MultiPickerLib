@@ -7,7 +7,7 @@ import br.com.alissontfb.multifilepicker.utils.FindFiles
 class ImagesFragment : FilePickerFragment(FilePickerFragment.IMAGE_TYPE) {
 
     override fun initAdapter(): ObFileView {
-        return getImages(root)
+        return getImages()
     }
 
     override fun setAdapter() {

@@ -2,7 +2,9 @@ package br.com.alissontfb.multifilepicker.ui.activity
 
 import android.Manifest
 import android.app.Activity
+import android.app.LoaderManager
 import android.content.Intent
+import android.content.Loader
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
@@ -16,7 +18,9 @@ import br.com.alissontfb.multifilepicker.BuildConfig
 import br.com.alissontfb.multifilepicker.R
 import br.com.alissontfb.multifilepicker.audio.AudioRecorder
 import br.com.alissontfb.multifilepicker.config.CheckPermissions
+import br.com.alissontfb.multifilepicker.loader.FileViewLoader
 import br.com.alissontfb.multifilepicker.model.FilePickerParams
+import br.com.alissontfb.multifilepicker.model.ObFileView
 import br.com.alissontfb.multifilepicker.preferences.Preferences
 import br.com.alissontfb.multifilepicker.ui.adapter.FileListAdapter
 import br.com.alissontfb.multifilepicker.ui.adapter.SectionsPagerAdapter
@@ -31,6 +35,10 @@ import java.io.File
 
 class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
 
+    companion object {
+        const val LOADER_FILES_ID = 1
+    }
+
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
     private lateinit var params: FilePickerParams
     private val selectedFiles = HashMap<String, String>()
@@ -39,6 +47,45 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
     private var moviesPath: String = ""
     private lateinit var currentAdapter: HashMap<Int, FileListAdapter>
     private lateinit var permission: CheckPermissions
+    private var obFileView: ObFileView? = null
+    private var savedInstance: Bundle? = null
+
+    private val fileViewCallback = object : LoaderManager.LoaderCallbacks<ObFileView> {
+
+        override fun onCreateLoader(id: Int, args: Bundle?): Loader<ObFileView> {
+            return FileViewLoader(this@FilePickerTabActivity, Environment.getExternalStorageDirectory())
+        }
+
+        override fun onLoadFinished(loader: Loader<ObFileView>?, data: ObFileView?) {
+            if (data != null) {
+                obFileView = data
+
+                mSectionsPagerAdapter = SectionsPagerAdapter(this@FilePickerTabActivity, params.tabList, supportFragmentManager)
+                container.adapter = mSectionsPagerAdapter
+                container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+
+                    override fun onPageSelected(position: Int) {
+                        selectedFiles.clear()
+                        val frag = mSectionsPagerAdapter!!.getItem(position)
+                        setUpMenus(frag.type)
+                        updateQuantityText(0, params.max)
+                    }
+
+                    override fun onPageScrollStateChanged(position: Int) {}
+                })
+                main_tabs.setupWithViewPager(container)
+
+                main_loader.visibility = View.GONE
+
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<ObFileView>?) {
+            obFileView = null
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +97,8 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        savedInstance = savedInstanceState
+        
         menu_ic_done.setOnClickListener {
             if (selectedFiles.values.isNotEmpty()) {
                 val paths = ArrayList<String>()
@@ -81,6 +130,11 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         params = FilePickerParams()
         if (intent.hasExtra(INTENT_TO_ACTIVITY_PARAM)) {
             params = intent.getSerializableExtra(INTENT_TO_ACTIVITY_PARAM) as FilePickerParams
+            if (savedInstance == null) {
+                loaderManager.initLoader(LOADER_FILES_ID, null, fileViewCallback)
+            }else {
+                loaderManager.restartLoader(LOADER_FILES_ID, null, fileViewCallback)
+            }
         }
 
         updateQuantityText(0, params.max)

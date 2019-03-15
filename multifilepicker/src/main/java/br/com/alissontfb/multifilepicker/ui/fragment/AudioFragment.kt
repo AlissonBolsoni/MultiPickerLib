@@ -7,7 +7,7 @@ import br.com.alissontfb.multifilepicker.utils.FindFiles
 class AudioFragment: FilePickerFragment(FilePickerFragment.AUDIO_TYPE) {
 
     override fun initAdapter(): ObFileView {
-        return FilesCache.getAudios(root)
+        return FilesCache.getAudios()
     }
 
     override fun setAdapter() {
