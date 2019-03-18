@@ -1,7 +1,7 @@
 package br.com.alissontfb.multifilepicker.ui.delegate
 
 import br.com.alissontfb.multifilepicker.model.FilePickerParams
-import br.com.alissontfb.multifilepicker.ui.adapter.FileListAdapter
+import br.com.alissontfb.multifilepicker.ui.adapter.filesAdpter.BaseListAdapter
 import java.io.File
 
 interface FilePickerItemsDelegate {
@@ -12,7 +12,7 @@ interface FilePickerItemsDelegate {
     fun addItemsSelected(item: File)
     fun removeItemsSelected(item: File)
     fun getSelectedItems():HashMap<String, String>
-    fun setAdapter(adapter: FileListAdapter, key: Int)
+    fun setAdapter(adapter: BaseListAdapter, key: Int)
     fun setMicOf()
 
 }

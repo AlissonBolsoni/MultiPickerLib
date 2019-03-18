@@ -22,8 +22,8 @@ import br.com.alissontfb.multifilepicker.loader.FileViewLoader
 import br.com.alissontfb.multifilepicker.model.FilePickerParams
 import br.com.alissontfb.multifilepicker.model.ObFileView
 import br.com.alissontfb.multifilepicker.preferences.Preferences
-import br.com.alissontfb.multifilepicker.ui.adapter.FileListAdapter
 import br.com.alissontfb.multifilepicker.ui.adapter.SectionsPagerAdapter
+import br.com.alissontfb.multifilepicker.ui.adapter.filesAdpter.BaseListAdapter
 import br.com.alissontfb.multifilepicker.ui.delegate.FilePickerItemsDelegate
 import br.com.alissontfb.multifilepicker.ui.fragment.FilePickerFragment
 import br.com.alissontfb.multifilepicker.utils.*
@@ -45,7 +45,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
     private var picsPath: String = ""
     private var audiosPath: String = ""
     private var moviesPath: String = ""
-    private lateinit var currentAdapter: HashMap<Int, FileListAdapter>
+    private lateinit var currentAdapter: HashMap<Int, BaseListAdapter>
     private lateinit var permission: CheckPermissions
     private var obFileView: ObFileView? = null
     private var savedInstance: Bundle? = null
@@ -315,7 +315,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
 
     override fun getSelectedItems() = selectedFiles
 
-    override fun setAdapter(adapter: FileListAdapter, key: Int) {
+    override fun setAdapter(adapter: BaseListAdapter, key: Int) {
         this.currentAdapter[key] = adapter
     }
 

@@ -1,4 +1,4 @@
-package br.com.alissontfb.multifilepicker.ui.adapter
+package br.com.alissontfb.multifilepicker.ui.adapter.filesAdpter
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -14,12 +14,13 @@ import br.com.alissontfb.multifilepicker.model.ObFileView
 import br.com.alissontfb.multifilepicker.utils.UtilsFile
 import java.io.File
 
-class FileListAdapter(private val context: Context,
-                      private val obFileView: ObFileView,
-                      private val maxSelect: Int,
-                      private val selectedFiles: HashMap<String, String>,
-                      private val onClick: (ObFileItemView) -> Unit,
-                      private val open: (File) -> Unit) : RecyclerView.Adapter<FileListAdapter.ItemHolder>() {
+abstract class BaseListAdapter(private val obFileView: ObFileView,
+                               protected val maxSelect: Int,
+                               internal val selectedFiles: HashMap<String, String>,
+                               protected val onClick: (ObFileItemView) -> Unit,
+                               protected val open: (File) -> Unit) : RecyclerView.Adapter<BaseListAdapter.ItemHolder>() {
+
+    internal lateinit var context: Context
 
     class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.item_picker_image)
@@ -28,6 +29,7 @@ class FileListAdapter(private val context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ItemHolder {
+        this.context = parent.context
         val view = LayoutInflater.from(context).inflate(R.layout.item_file_picker, parent, false)
         return ItemHolder(view)
     }
@@ -51,7 +53,7 @@ class FileListAdapter(private val context: Context,
         this.selectedFiles.putAll(selectedFiles)
     }
 
-    private fun setChecked(item: ObFileItemView) {
+    internal fun setChecked(item: ObFileItemView) {
         if (item.checked) {
             selectedFiles.getOrPut(item.item.path) {
                 item.item.path
@@ -61,30 +63,13 @@ class FileListAdapter(private val context: Context,
             selectedFiles.remove(item.item.path)
     }
 
-    private fun setTypeItem(holder: ItemHolder, file: ObFileItemView) {
-        if (file.item.isDirectory) {
-            holder.image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_folder))
-            holder.image.setOnClickListener {
-                open(file.item)
-            }
-        } else {
-            setFileIcon(holder, file)
-            holder.image.setOnClickListener {
-                file.checked = !file.checked
-                if (selectedFiles.values.size < maxSelect) {
-                    setChecked(file)
-                    markAsSelected(file, holder.checked)
-                    onClick(file)
-                }
-            }
-        }
-    }
+    abstract fun setTypeItem(holder: ItemHolder, file: ObFileItemView)
 
-    private fun setFileIcon(holder: ItemHolder, file: ObFileItemView) {
+    internal fun setFileIcon(holder: ItemHolder, file: ObFileItemView) {
         UtilsFile.setImageFromExtension(context, file.item.path, holder.image)
     }
 
-    private fun markAsSelected(item: ObFileItemView, imageView: ImageView) {
+    internal fun markAsSelected(item: ObFileItemView, imageView: ImageView) {
         if (item.checked || isAlreadyChecked(item))
             imageView.visibility = View.VISIBLE
         else
