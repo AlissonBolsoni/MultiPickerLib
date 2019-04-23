@@ -59,7 +59,10 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             if (data != null) {
                 obFileView = data
 
-                mSectionsPagerAdapter = SectionsPagerAdapter(this@FilePickerTabActivity, params.tabList, supportFragmentManager)
+//                configureTabAdapter()
+
+                mSectionsPagerAdapter =
+                    SectionsPagerAdapter(this@FilePickerTabActivity, params.tabList, supportFragmentManager)
                 container.adapter = mSectionsPagerAdapter
                 container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                     override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
@@ -109,7 +112,7 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         super.finish()
     }
 
-    private fun setUpView(){
+    private fun setUpView() {
         menu_ic_done.setOnClickListener {
             if (selectedFiles.values.isNotEmpty()) {
                 val paths = ArrayList<String>()
@@ -128,20 +131,21 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         params = FilePickerParams()
         if (intent.hasExtra(INTENT_TO_ACTIVITY_PARAM)) {
             params = intent.getSerializableExtra(INTENT_TO_ACTIVITY_PARAM) as FilePickerParams
+            updateQuantityText(0, params.max)
             if (savedInstance == null) {
                 loaderManager.initLoader(LOADER_FILES_ID, null, fileViewCallback)
-            }else {
+            } else {
                 loaderManager.restartLoader(LOADER_FILES_ID, null, fileViewCallback)
             }
         }
+    }
 
-        updateQuantityText(0, params.max)
-
+    private fun configureTabAdapter() {
         mSectionsPagerAdapter = SectionsPagerAdapter(this, params.tabList, supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
         container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-                if(params.tabList.size == 1 && p0 == p2){
+                if (params.tabList.size == 1 && p0 == p2) {
 
                     val frag = mSectionsPagerAdapter!!.getItem(p0)
                     setUpMenus(frag.type)
@@ -190,11 +194,11 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                     authority = BuildConfig.APPLICATION_ID + ".provider"
 
                 intent.putExtra(
-                        MediaStore.EXTRA_OUTPUT,
-                        FileProvider.getUriForFile(
-                                this,
-                                authority, picFile
-                        )
+                    MediaStore.EXTRA_OUTPUT,
+                    FileProvider.getUriForFile(
+                        this,
+                        authority, picFile
+                    )
                 )
 
                 startActivityForResult(intent, CAMERA_REQUEST)
@@ -202,9 +206,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         } else if (type == FilePickerFragment.AUDIO_TYPE && params.saveAudio) {
             menu_ic_mic.visibility = View.VISIBLE
             menu_ic_mic.setOnClickListener {
-                if(main_audio_layout.visibility == View.VISIBLE){
+                if (main_audio_layout.visibility == View.VISIBLE) {
                     main_audio_layout.visibility = View.GONE
-                }else{
+                } else {
                     main_audio_layout.visibility = View.VISIBLE
                     val path = File(Environment.getExternalStorageDirectory(), params.folder)
 
@@ -215,9 +219,9 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                             FilesCache.reset()
                             this.currentAdapter[FindFiles.AUDIO]?.putFile(it)
                             val adapter = this.currentAdapter[FindFiles.AUDIO]
-                            val select = adapter?.getSelectedFiles()?.size?:0
-                            updateQuantityText(select,params.max)
-                        },{
+                            val select = adapter?.getSelectedFiles()?.size ?: 0
+                            updateQuantityText(select, params.max)
+                        }, {
                             runOnUiThread {
                                 main_time_audio.text = it
                             }
@@ -242,11 +246,11 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                     authority = BuildConfig.APPLICATION_ID + ".provider"
 
                 intent.putExtra(
-                        MediaStore.EXTRA_OUTPUT,
-                        FileProvider.getUriForFile(
-                                this,
-                                authority, picFile
-                        )
+                    MediaStore.EXTRA_OUTPUT,
+                    FileProvider.getUriForFile(
+                        this,
+                        authority, picFile
+                    )
                 )
 
                 startActivityForResult(intent, MOVIE_REQUEST)
@@ -304,14 +308,14 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.IMAGE]?.putFile(File(picsPath))
                 val adapter = this.currentAdapter[FindFiles.IMAGE]
-                val select = adapter?.getSelectedFiles()?.size?:0
-                updateQuantityText(select,params.max)
+                val select = adapter?.getSelectedFiles()?.size ?: 0
+                updateQuantityText(select, params.max)
             } else if (requestCode == MOVIE_REQUEST) {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.VIDEO]?.putFile(File(moviesPath))
                 val adapter = this.currentAdapter[FindFiles.VIDEO]
-                val select = adapter?.getSelectedFiles()?.size?:0
-                updateQuantityText(select,params.max)
+                val select = adapter?.getSelectedFiles()?.size ?: 0
+                updateQuantityText(select, params.max)
             } else if (requestCode == AUDIO_REQUEST) {
                 FilesCache.reset()
                 this.currentAdapter[FindFiles.AUDIO]?.putFile(File(audiosPath))
