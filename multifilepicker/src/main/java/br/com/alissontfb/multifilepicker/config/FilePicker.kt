@@ -6,6 +6,7 @@ import br.com.alissontfb.multifilepicker.R
 import br.com.alissontfb.multifilepicker.model.FilePickerParams
 import br.com.alissontfb.multifilepicker.preferences.Preferences
 import br.com.alissontfb.multifilepicker.ui.activity.FilePickerTabActivity
+import br.com.alissontfb.multifilepicker.ui.activity.PermissionsActivity
 import br.com.alissontfb.multifilepicker.utils.INTENT_TO_ACTIVITY_PARAM
 import br.com.alissontfb.multifilepicker.utils.REQUEST_CODE_TO_RESULT
 
@@ -18,7 +19,7 @@ class FilePicker private constructor(
 
         builder.params.tabList = builder.tabList
 
-        val intent = Intent(builder.context, FilePickerTabActivity::class.java)
+        val intent = Intent(builder.context, PermissionsActivity::class.java)
         intent.putExtra(INTENT_TO_ACTIVITY_PARAM, builder.params)
         builder.context.startActivityForResult(intent, REQUEST_CODE_TO_RESULT)
     }
