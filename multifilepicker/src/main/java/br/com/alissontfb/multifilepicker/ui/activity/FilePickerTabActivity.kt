@@ -59,8 +59,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             if (data != null) {
                 obFileView = data
 
-//                configureTabAdapter()
-
                 mSectionsPagerAdapter =
                     SectionsPagerAdapter(this@FilePickerTabActivity, params.tabList, supportFragmentManager)
                 container.adapter = mSectionsPagerAdapter
