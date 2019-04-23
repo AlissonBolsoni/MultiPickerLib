@@ -107,6 +107,8 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
                 onBackPressed()
             }
         }
+
+        setUpView()
     }
 
     override fun onBackPressed() {
