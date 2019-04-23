@@ -46,7 +46,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
     private var audiosPath: String = ""
     private var moviesPath: String = ""
     private lateinit var currentAdapter: HashMap<Int, BaseListAdapter>
-    private lateinit var permission: CheckPermissions
     private var obFileView: ObFileView? = null
     private var savedInstance: Bundle? = null
 
@@ -91,9 +90,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_picker_tab)
         setSupportActionBar(file_picker_toolbar)
-
-        permission = CheckPermissions(this, this)
-        permission.verifyPermissions(PERMISSION_REQUEST_STORAGE, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA ))
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -162,26 +158,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         main_tabs.setupWithViewPager(container)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (PERMISSION_REQUEST == requestCode) {
-            for (result in grantResults) {
-                if (result == PackageManager.PERMISSION_DENIED) {
-//                    permission.alertPermissionValidation()
-                }
-            }
-        } else if(PERMISSION_REQUEST_STORAGE == requestCode){
-            for (result in grantResults) {
-                if (result == PackageManager.PERMISSION_DENIED) {
-                    permission.alertPermissionValidation()
-                    break
-                }
-            }
-            setUpView()
-        }
-    }
-
     override fun setMicOf() {
         menu_ic_mic.visibility = View.GONE
     }
@@ -223,8 +199,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
             }
         } else if (type == FilePickerFragment.AUDIO_TYPE && params.saveAudio) {
             menu_ic_mic.visibility = View.VISIBLE
-            permission = CheckPermissions(this, this)
-            permission.verifyPermissions(PERMISSION_REQUEST, permission.necessaryPermissions())
             menu_ic_mic.setOnClickListener {
                 if(main_audio_layout.visibility == View.VISIBLE){
                     main_audio_layout.visibility = View.GONE
