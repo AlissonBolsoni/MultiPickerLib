@@ -14,18 +14,20 @@ import br.com.alissontfb.multifilepicker.model.ObFileView
 import br.com.alissontfb.multifilepicker.utils.UtilsFile
 import java.io.File
 
-class ImageListAdapter(obFileView: ObFileView,
-                       maxSelect: Int,
-                       selectedFiles: HashMap<String, String>,
-                       onClick: (ObFileItemView) -> Unit,
-                       open: (File) -> Unit) : BaseListAdapter(obFileView, maxSelect, selectedFiles, onClick, open) {
+class ImageListAdapter(
+    obFileView: ObFileView,
+    maxSelect: Int,
+    selectedFiles: HashMap<String, String>,
+    onClick: (ObFileItemView) -> Unit,
+    open: (File) -> Unit
+) : BaseListAdapter(obFileView, maxSelect, selectedFiles, onClick, open) {
 
 
     override fun setTypeItem(holder: BaseListAdapter.ItemHolder, file: ObFileItemView) {
         setFileIcon(holder, file)
         holder.image.setOnClickListener {
-            file.checked = !file.checked
-            if (selectedFiles.values.size < maxSelect) {
+            if (selectedFiles.values.size < maxSelect || (selectedFiles.values.size == maxSelect && file.checked)) {
+                file.checked = !file.checked
                 setChecked(file)
                 markAsSelected(file, holder.checked)
                 onClick(file)
