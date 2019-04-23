@@ -20,6 +20,7 @@ class FilePicker private constructor(
         builder.params.tabList = builder.tabList
 
         val intent = Intent(builder.context, PermissionsActivity::class.java)
+
         intent.putExtra(INTENT_TO_ACTIVITY_PARAM, builder.params)
         builder.context.startActivityForResult(intent, REQUEST_CODE_TO_RESULT)
     }
