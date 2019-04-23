@@ -94,19 +94,6 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         savedInstance = savedInstanceState
-        
-        menu_ic_done.setOnClickListener {
-            if (selectedFiles.values.isNotEmpty()) {
-                val paths = ArrayList<String>()
-                paths.addAll(selectedFiles.values)
-                val intent = Intent()
-                intent.putExtra(PARAM_RESULT_ITEMS_PATHS, paths)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                onBackPressed()
-            }
-        }
 
         setUpView()
     }
@@ -123,6 +110,19 @@ class FilePickerTabActivity : AppCompatActivity(), FilePickerItemsDelegate {
     }
 
     private fun setUpView(){
+        menu_ic_done.setOnClickListener {
+            if (selectedFiles.values.isNotEmpty()) {
+                val paths = ArrayList<String>()
+                paths.addAll(selectedFiles.values)
+                val intent = Intent()
+                intent.putExtra(PARAM_RESULT_ITEMS_PATHS, paths)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            } else {
+                onBackPressed()
+            }
+        }
+
         currentAdapter = HashMap()
 
         params = FilePickerParams()
