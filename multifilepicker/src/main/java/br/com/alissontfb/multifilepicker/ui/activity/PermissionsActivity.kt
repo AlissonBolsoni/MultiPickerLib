@@ -21,7 +21,7 @@ class PermissionsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_permissions)
 
         permission = CheckPermissions(this, null)
-        permission.verifyPermissions(
+        val permissions = permission.verifyPermissions(
             PERMISSION_REQUEST_STORAGE,
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
         )
@@ -30,8 +30,9 @@ class PermissionsActivity : AppCompatActivity() {
         parameters = FilePickerParams()
         if (intent.hasExtra(INTENT_TO_ACTIVITY_PARAM)) {
             parameters = intent.getSerializableExtra(INTENT_TO_ACTIVITY_PARAM) as FilePickerParams
-
-        }
+            if (permissions)
+                gotoFilePicker()
+        }else finish()
     }
 
     private fun gotoFilePicker() {

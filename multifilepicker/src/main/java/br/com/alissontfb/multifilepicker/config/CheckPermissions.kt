@@ -36,6 +36,7 @@ class CheckPermissions(private val activity: Activity, private val callback: Fil
 
 
             ActivityCompat.requestPermissions(activity, permissionsArray, requestCode)
+             return false
         }
 
         return true
