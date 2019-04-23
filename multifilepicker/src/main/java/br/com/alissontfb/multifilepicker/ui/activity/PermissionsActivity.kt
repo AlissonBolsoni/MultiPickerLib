@@ -32,7 +32,7 @@ class PermissionsActivity : AppCompatActivity() {
             parameters = intent.getSerializableExtra(INTENT_TO_ACTIVITY_PARAM) as FilePickerParams
             if (permissions)
                 gotoFilePicker()
-        }else finish()
+        }
     }
 
     private fun gotoFilePicker() {
