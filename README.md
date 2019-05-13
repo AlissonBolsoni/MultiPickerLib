@@ -1,17 +1,28 @@
 # MultiPickerLib
 MultiPickerLib
 
-To use this Lib on your project. 
-You must add on your app gradle
-(implementation 'com.github.AlissonBolsoni:MultiPickerLib:1.0.1')
-and
-in your project gradle
+## Add MultiPickerLib Library with dependency:
 
-```
-(maven { url 'https://jitpack.io' })
+- Add it in your `build.gradle` (root) at the end of repositories:
+
+```gradle
+  allprojects {
+    repositories {
+      ...
+      maven { url "https://jitpack.io" }
+    }
+  }
 ```
 
-After that you can use like this
+- Add the dependency in your `build.gradle` project
+
+```gradle
+  dependencies {
+          implementation 'com.github.AlissonBolsoni:MultiPickerLib:1.0.1'
+  }
+```
+
+## After that you can use like this
 
 #config
 ```kotlin
